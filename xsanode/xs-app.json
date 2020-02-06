@@ -1,0 +1,11 @@
+{
+"routes": [
+	{
+		"source": "/",
+		"target": "/",
+		"destination": "xsaonprem",
+		"csrfProtection": false,
+		"authenticationType": "basic"
+	}
+]
+}

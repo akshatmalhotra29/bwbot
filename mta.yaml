@@ -1,0 +1,46 @@
+ID: bwchatbot
+_schema-version: '2.1'
+version: 0.0.1
+modules:
+  - name: nodeservice
+    type: nodejs
+    path: nodeservice
+    provides:
+      - name: nodeservice_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: destination-demo-lite
+      - name: connectivity-demo-lite
+      - name: xsuaa-demo
+  - name: xsanode
+    type: nodejs
+    path: xsanode
+    provides:
+      - name: xsanode_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: destination-demo-lite
+      - name: connectivity-demo-lite
+      - name: xsuaa-demo
+
+  - name: ui
+    type: html5
+    path: ui
+    parameters:
+       disk-quota: 256M
+       memory: 256M
+    build-parameters:
+       builder: grunt
+    requires:
+     - name: xsuaa-demo
+     - name: destination-demo-lite
+
+resources:
+  - name: destination-demo-lite
+    type: org.cloudfoundry.existing-service
+  - name: connectivity-demo-lite
+    type: org.cloudfoundry.existing-service
+  - name: xsuaa-demo
+    type: org.cloudfoundry.existing-service
